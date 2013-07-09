@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.server2bye.mvc.AbstractContextControllerTests;
+import com.server2bye.mvc.URLConfig;
 
 
 import org.apache.http.util.EntityUtils;
@@ -30,12 +31,13 @@ public class MediaControllerTests extends AbstractContextControllerTests {
 		httpClient = new DefaultHttpClient();
         httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
         multipartEntity = new MultipartEntity();
+        config = new URLConfig();
 	}
 	@Test
 	public void testSaveFiles() throws Exception {
 
 		// API request URL
-		String requestURL = "http://localhost:8080/server2bye/form/upload";
+		String requestURL = config.url2bye+"/media/upload";
 		// API request parameters
 		String tobyeId = "525252228";
 		String tokenId = "dfc7ad3884e7";

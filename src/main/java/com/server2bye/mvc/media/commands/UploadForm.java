@@ -1,4 +1,4 @@
-package com.server2bye.mvc.form.commands;
+package com.server2bye.mvc.media.commands;
 
 import java.util.List;
 
