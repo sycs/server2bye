@@ -1,4 +1,4 @@
-package com.server2bye.mvc.media.controller;
+package com.server2bye.mvc.form.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
