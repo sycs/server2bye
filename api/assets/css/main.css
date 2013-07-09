@@ -1,0 +1,240 @@
+﻿body {
+    padding: 20px;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+
+div, span, ul, li, a, td, th, input {
+    font-family: Helvetica, arial, freesans, clean, sans-serif;
+}
+
+h3 {
+    font-size: 22px;
+}
+
+.table thead {
+    background-color: #f5f5f5!important;
+}
+
+.table th {
+    text-align: center;
+}
+
+.table td {
+    background-color: #fff;
+}
+
+.request-th {
+    font-weight: bold;
+    width: 150px;
+}
+
+.parameter-parameter {
+    width: 150px;
+}
+
+.parameter-value {
+    width: 200px;
+}
+
+.parameter-mandatory {
+    text-align: center!important;
+}
+
+.parameter-description {
+}
+
+.parameter-datatype {
+    text-align: center!important;
+    width: 100px;
+}
+
+#resources_container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.resource {
+    border-bottom: 1px solid #d5d5d5;
+}
+
+    .resource .heading {
+        border: 1px solid transparent;
+        float: none;
+        clear: both;
+        overflow: hidden;
+        display: block;
+    }
+
+    .resource h2 {
+        display: block;
+        float: left;
+        margin: 0;
+        font-weight: bold;
+        font-size:18px;
+        font-family: Helvetica, arial, freesans, clean, sans-serif;
+    }
+
+    .resource ul.options {
+        float: none;
+        clear: both;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        display: block;
+        clear: none;
+        float: right;
+        margin: 14px 10px 0 0;
+    }
+
+        .resource ul.options li {
+            clear: none;
+            margin: 0;
+            padding: 2px 10px;
+            border-right: 1px solid #dddddd;
+            float: left;
+        }
+
+    .resource .endpoints {
+        display: none;
+        padding: 0;
+    }
+
+.response_content {
+    background-color: #f7f7f7;
+    padding: 10px;
+    border: 1px solid #d5d5d5;
+}
+
+.apilink_content {
+    background-color: #f7f7f7;
+    padding: 10px;
+    border: 1px solid #d5d5d5;
+    margin-bottom: 10px;
+}
+
+.response_description {
+    background-color: #ffffed;
+    padding: 10px;
+    border: 1px solid #d5d5d5;
+}
+
+
+.operation {
+    float: none;
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 0 20px 10px 0;
+}
+
+    .operation h3 {
+        margin: 0;
+    }
+
+    .operation .heading .path {
+        display: inline-block;
+        padding: 0 0 0 20px;
+        font-size: 14px;
+    }
+
+    .operation .content {
+        display: none;
+        padding: 0 25px 20px 25px;
+        border: 1px solid #afcde7;
+        border-top: none;
+    }
+
+        .operation .content h3 {
+            padding: 10px 0;
+        }
+
+    .operation .heading h3, .operation .heading h3 span {
+        line-height: 25px;
+        font-size: 12px;
+        font-family: Helvetica, arial, freesans, clean, sans-serif;
+    }
+
+
+    .operation.post .heading {
+        cursor: pointer;
+    }
+
+        .operation.post .heading h3 {
+            background-color: #ecf7fe;
+            padding: 0 0 0 0;
+            border: 1px solid #afcde7;
+        }
+
+    .operation.get .heading h3 {
+        background-color: #b9f6d2;
+        padding: 0 0 0 0;
+    }
+
+    .operation .http_method {
+        color: #fff;
+        text-transform: uppercase;
+        display: inline-block;
+        line-height: 30px!important;
+        width: 60px;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        padding: 1px 0 1px 0;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        -o-border-radius: 2px;
+        -ms-border-radius: 2px;
+        -khtml-border-radius: 2px;
+        border-radius: 2px;
+    }
+
+    .operation .name {
+        float: right;
+        font-size: 12px;
+        display: inline-block;
+        padding: 2px 20px 0 0;
+        color: #565656;
+    }
+
+    .operation.post .http_method {
+        background-color: #1388d2;
+    }
+
+    .operation.get .http_method {
+        background-color: #44c492;
+    }
+
+    .operation.post .name {
+        color: #164f7e;
+    }
+
+    .operation.post .path {
+        color: #164f7e;
+    }
+
+    .operation.get .path {
+        color: #164f7e;
+    }
+
+.radius3 {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.demo_value {
+    color: #fb6f05;
+    font-weight: bold;
+}
+
+textarea {
+    height: 100px;
+    width: 90%;
+}

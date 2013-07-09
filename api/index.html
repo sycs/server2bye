@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <script src="assets/js/jquery-1.7.2.min.js"></script>
+    <script src="assets/js/jquery.tmpl.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script>
+        var resources = [];
+        var server = "http://localhost:8080/server2bye";
+    </script>
+</head>
+<body>
+
+    <div id="resources_container">
+        <ul id="resources">
+        </ul>
+        <span id="time"></span>
+    </div>
+
+    <script id="doc_tmp_resource" type="text/x-jquery-tmpl">
+
+        <li id="resource_${name}" class="resource">
+
+            <div class="heading">
+                <h2>
+                    <a href="#" onclick="Docs.toggleEndpointListForResource('${id}');">/${name}</a>
+                </h2>
+                <ul class="options">
+                    <li>
+                        <a href="#!/${name}" id="endpointListTogger_user" onclick="Docs.toggleEndpointListForResource('${id}');">Show/Hide</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="Docs.collapseOperationsForResource('${id}'); return false;">List Operations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="Docs.expandOperationsForResource('${id}'); return false;">Expand Operations
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul id="endpoint_list_${id}" class="endpoints">
+                {{each operations}}     
+                    <li class="operation ${http_method}">
+                        <div class="heading" onclick="Docs.toggleContent('${notes}');">
+                            <h3 class="radius3">
+                                <span class="http_method">${http_method}</span>
+                                <span class="path">${path}</span>
+                                <span class="name">${notes}</span>
+                            </h3>
+                        </div>
+                        <div class="content" id="content_${notes}">
+                            <h3>Description </h3>
+                            <div class="response_content">
+                                {{html description}}
+                            </div>
+                            <h3>Request </h3>
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td class="request-th">url</td>
+                                        <td>${path}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="request-th">http请求方式</td>
+                                        <td>${http_method}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>Parameters </h3>
+                            <form id="form_${notes}" method="${http_method}">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="parameter-parameter">parameter</th>
+                                            <th class="parameter-value">value</th>
+                                            <th class="parameter-mandatory">Mandatory?</th>
+                                            <th class="parameter-description">description</th>
+                                            <th class="parameter-datatype">data type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{each parameters}}     
+                                    <tr>
+                                        <td class="parameter-parameter">${parameter}</td>
+                                        <td class="parameter-value">{{if isTextarea(value_type)}}<textarea cols="5" name="${parameter}">${value}</textarea>{{else}}<input name="${parameter}" type="${value_type}" value="${value}" />{{/if}}</td>
+                                        <td class="parameter-mandatory">
+                                            <img alt="" src="assets/img/${mandatory}.png" /></td>
+                                        <td class="parameter-description">${description}</td>
+                                        <td class="parameter-datatype">${data_type}</td>
+                                    </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                                <h3>Demo</h3>
+                                <div class="apilink_content radius3">
+                                    <a href="javascript:;" onclick="window.open($(this).text())">{{html ApiLink(parameters, path)}}</a>
+                                </div>
+                                <button type="button" class="btn" onclick="Docs.TestApi(this,'${$index}', '${path}')">test api</button>
+                            </form>
+                            <h3>Response </h3>
+                            <div class="response_content radius3">
+                                {{html response.data}}
+                            </div>
+                            <h5>description</h5>
+                            <div class="response_description radius3">
+                                {{html response.description}}
+                            </div>
+
+                            <h3>Return Code </h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="returncode-errcode">errcode</th>
+                                        <th class="returncode-msg">msg</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{each return_code}}     
+                                    <tr>
+                                        <td class="returncode-errcode">${errcode}</td>
+                                        <td class="returncode-msg">${msg}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                {{/each}}      
+            </ul>
+        </li>
+
+    </script>
+    <script src="api/register.js" type="text/javascript"></script>
+    <script src="api/user.js" type="text/javascript"></script>
+    <script src="api/lbs.js" type="text/javascript"></script>
+    <script src="api/upload.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var Docs = {};
+
+        Docs.toggleEndpointListForResource = function (name) {
+            $("#endpoint_list_" + name).slideToggle();
+        }
+
+
+        Docs.collapseOperationsForResource = function (name) {
+            $("#endpoint_list_" + name + " .operation .content").hide();
+            $("#endpoint_list_" + name).slideDown("slow");
+        }
+
+        Docs.expandOperationsForResource = function (name) {
+            $("#endpoint_list_" + name + " .operation .content").show();
+            $("#endpoint_list_" + name).show();
+        }
+
+        Docs.toggleContent = function (name) {
+            $("#content_" + name).slideToggle();
+        }
+
+        Docs.TestApi = function (obj, index, path) {
+            var form = $(obj).parent("form");
+            var params = [];
+            $.each(form.find("input"), function (index) {
+                params.push($(this).attr("name") + "=" + $(this).val());
+            });
+
+            form.attr("action", server + path + "?" + params.join("&"));
+            form.attr("target", "_blank");
+            form.submit();
+        }
+
+        Docs.init = function () {
+            var timer = new Date().getTime();
+            $("#doc_tmp_resource").tmpl(resources).appendTo("#resources");
+        }
+
+        function ApiLink(parameters, path) {
+
+            var params = [];
+            for (var i in parameters) {
+                params.push(parameters[i].parameter + "=<span class='demo_value'>" + (parameters[i].value=="" ? "[" + parameters[i].parameter + "]" : parameters[i].value) + "</span>");
+            }
+            return server + path + "?" + params.join("&");
+        }
+
+        function isTextarea(value_type) {
+            return value_type == "textarea";
+        }
+
+        Docs.init();
+    </script>
+</body>
+</html>
